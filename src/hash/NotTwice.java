@@ -58,6 +58,13 @@ public class NotTwice {
 
 		System.out.println("value2 : "+value2);
 		
+		/**
+		 * Linear Probing 기법
+		 * 폐쇄 해슁 또는 Close Hashing 기법 중 하나: 해쉬 테이블 저장공간 안에서 충돌 문제를 해결하는 기법
+		 * 충돌이 일어나면, 해당 hash address의 다음 address 부터 맨 처음 나오는 빈공간에 저장하는 기법
+		 * 저장공간 활용도를 높이기 위한 기법
+		 * */
+		
 	}
 
 }
