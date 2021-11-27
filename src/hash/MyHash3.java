@@ -59,23 +59,25 @@ public class MyHash3 {
 		return true;
 	}
 	
-	public void gitAddAll() {
-		
-	}
 	public String getData(String key) {
-		int address = (int)(key.charAt(0))%this.hashTable.length;
+		int address = hashFunc(key);
 		if(this.hashTable[address] != null) {
-			//return this.hashTable[address].value;
-			
-			Slot findSlot = this.hashTable[address];
-			while(findSlot != null) {
-				if(findSlot.key == key) {
-					return findSlot.value;
-				}else {
-					//findSlot = findSlot.next;
+			if(this.hashTable[address].key == key) {
+				return this.hashTable[address].value;
+			}else {
+				int currAddress = address +1;
+				while(this.hashTable[currAddress] != null) {
+					if(this.hashTable[currAddress].key == key) {
+						return this.hashTable[currAddress].value;
+					}else {
+						currAddress++;
+						if(currAddress >= this.hashTable.length) {
+							return null;
+						}
+					}
 				}
+				return null;
 			}
-			return null;
 		}else {
 			return null;
 		}
