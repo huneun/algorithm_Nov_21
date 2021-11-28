@@ -26,17 +26,14 @@ public class MyHash3 {
 		return (int)(key.charAt(0))%this.hashTable.length;
 	}
 	
-	
-	
 	public boolean saveData(String key, String value) {
-		int address = this.hashFunc(key);
+		int address = hashFunc(key);
 		if(this.hashTable[address] != null) {
-			
 			if(this.hashTable[address].key == key) {
 				this.hashTable[address].value = value;
 				return true;
 			}else {
-				int currAddress = address+1;
+				int currAddress = address +1;
 				while(this.hashTable[currAddress] != null) {
 					if(this.hashTable[currAddress].key == key) {
 						this.hashTable[currAddress].value = value;
@@ -48,17 +45,47 @@ public class MyHash3 {
 						}
 					}
 				}
-				this.hashTable[currAddress] = new Slot(value, key);
+				this.hashTable[currAddress] = new Slot(key, value);
 				return true;
 			}
-			
 		}else {
-			this.hashTable[address] = new Slot(value, key);
+			this.hashTable[address] = new Slot(key, value);
 		}
-		
 		return true;
 	}
 	
+//	public boolean saveData(String key, String value) { 
+//		int address = this.hashFunc(key);
+//		
+//		if(this.hashTable[address] != null) { // 첫번째 조건. 키에 따라 정해진 주소를 가진 저장공간이 만들어져 있느냐 없느냐 (Slot객체가 사이즈만 정해져 있다면 처음은 다 null이 될 것입니다.)
+//			
+//			if(this.hashTable[address].key == key) { // 두번째 조건. Slot 객체의 인스턴스인 hashTable의 key값이 저장하려는 키와 같는냐 같지 않느냐
+//				this.hashTable[address].value = value; // 만일 키가 같으면(David == David) 데이터를 인자값으로 바꾸어 저장
+//				return true; // 메소드 실행 true 리턴
+//			}else {
+//				int currAddress = address+1; //만일 키값이 같지 않다면 (주소값은 같은데 키값은 안같은 경우) 다른곳에 저장하기 위해 주소에 1을 더한 상태에서 다음 코드를 실행
+//				while(this.hashTable[currAddress] != null) {
+//					if(this.hashTable[currAddress].key == key) {
+//						this.hashTable[currAddress].value = value;
+//						return true;
+//					}else {
+//						currAddress++;
+//						if(currAddress >= this.hashTable.length) {
+//							return false;
+//						}
+//					}
+//				}
+//				this.hashTable[currAddress] = new Slot(value, key);
+//				return true;
+//			}
+//			
+//		}else {
+//			this.hashTable[address] = new Slot(value, key);
+//		}
+//		
+//		return true;
+//	}
+//	
 	public String getData(String key) {
 		int address = hashFunc(key);
 		if(this.hashTable[address] != null) {
